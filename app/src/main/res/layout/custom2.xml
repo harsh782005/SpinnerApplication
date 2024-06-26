@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/custom2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".FirstFragment">
+    android:gravity="center"
+    >
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn1"
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="@string/spinner" />
-
+        android:text="@string/congrats"
+        android:textStyle="bold|italic"
+        android:textAlignment="center"
+        android:background="#F1C3D3"
+        android:textSize="50sp"
+     />
 
 </LinearLayout>

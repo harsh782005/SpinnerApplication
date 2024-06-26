@@ -12,13 +12,25 @@
         android:id="@+id/staticValueSpinner"
         android:layout_marginTop="140dp"
         android:entries="@array/gender"
-        android:text="@string/hello_blank_fragment" />
+       />
+    <Spinner
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dynamicValueSpinner"
+        android:layout_marginTop="140dp"
+        android:entries="@array/gender"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnmain"
+        android:text="@string/listveiwadapter"
+        android:layout_gravity="center"/>
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/aa"
-        android:layout_gravity="right"
-        android:layout_marginTop="400dp"
+        android:layout_gravity="center"
         android:id="@+id/btn2"/>
 
 </LinearLayout>

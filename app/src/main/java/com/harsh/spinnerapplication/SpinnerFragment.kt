@@ -8,8 +8,10 @@ import android.view.View
 import android.widget.Toast
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import androidx.navigation.fragment.findNavController
 import com.harsh.spinnerapplication.databinding.FragmentSpinnerBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,8 +28,10 @@ class SpinnerFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-var binding : FragmentSpinnerBinding ?= null
-var mainActivity : MainActivity ?=null
+    var binding: FragmentSpinnerBinding? = null
+    var mainActivity: MainActivity? = null
+    var array = arrayListOf("")
+lateinit var arrayAdapter : ArrayAdapter<String>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mainActivity = activity as MainActivity
@@ -42,45 +46,59 @@ var mainActivity : MainActivity ?=null
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSpinnerBinding.inflate(layoutInflater)
-        return  binding?.root
+        return binding?.root
         // Inflate the layout for this fragment
-       // return inflater.inflate(R.layout.fragment_spinner, container, false)
+        // return inflater.inflate(R.layout.fragment_spinner, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.staticValueSpinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                var selectedItem = binding?.staticValueSpinner?.selectedItem as String
-                Toast.makeText(requireContext(), "Selected gender ${position} $selectedItem", Toast.LENGTH_LONG).show()
+        arrayAdapter = ArrayAdapter(requireContext(),
+            android.R.layout.simple_list_item_1,
+            array)
+        binding?.dynamicValueSpinner?.adapter = arrayAdapter
+        binding?.staticValueSpinner?.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    var selectedItem = binding?.staticValueSpinner?.selectedItem as String
+                    Toast.makeText(
+                        requireContext(),
+                        "Selected gender ${position} $selectedItem",
+                        Toast.LENGTH_LONG
+                    ).show()
 
-            }
+                }
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
+                override fun onNothingSelected(parent: AdapterView<*>?) {
+                }
             }
+        binding?.btnmain?.setOnClickListener {
+            findNavController().navigate(R.id.action_spinnerFragment_to_list)
         }
         binding?.btn2?.setOnClickListener {
-        Dialog(this).apply {
-            setContentView(R.layout.custom)
-            show()
-            val editText = this.findViewById<EditText>(R.id.edt1)
-            val button = this.findViewById<Button>(R.id.add)
-            button?.setOnClickListener {
-                if (editText?.text?.toString().isNullOrEmpty()){
-                    editText?.error = "enter your city"
-                }
-                else {
-                    this.dismiss()
+            Dialog(requireContext()).apply {
+                setContentView(R.layout.custom)
+                show()
+                val edt1 = this.findViewById<EditText>(R.id.edt1)
+                val add = this.findViewById<Button>(R.id.add)
+                add?.setOnClickListener {
+                    if (edt1?.text?.toString().isNullOrEmpty()) {
+                        edt1?.error = "enter your city"
+                    } else {
+                      array.add(edt1?.text?.toString()?:"")
+                        this.dismiss()
+                    }
                 }
             }
         }
-        }
+
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of

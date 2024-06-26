@@ -22,5 +22,14 @@
         android:id="@+id/spinnerFragment"
         android:name="com.harsh.spinnerapplication.SpinnerFragment"
         android:label="fragment_spinner"
-        tools:layout="@layout/fragment_spinner" />
+        tools:layout="@layout/fragment_spinner" >
+        <action
+            android:id="@+id/action_spinnerFragment_to_list"
+            app:destination="@id/list" />
+    </fragment>
+    <fragment
+        android:id="@+id/list"
+        android:name="com.harsh.spinnerapplication.list"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" />
 </navigation>
