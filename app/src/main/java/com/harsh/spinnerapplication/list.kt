@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.harsh.spinnerapplication.databinding.FragmentListBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,6 +24,8 @@ class list : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 var binding : FragmentListBinding ?= null
+    lateinit var arrayAdapter : ArrayAdapter<String>
+    var array = arrayListOf("")
     var mainActivity : MainActivity ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +48,11 @@ var binding : FragmentListBinding ?= null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.btn5?.setOnClickListener {
+        arrayAdapter = ArrayAdapter(requireContext(),
+            android.R.layout.simple_list_item_1,
+            array)
+        binding?.list?.adapter = arrayAdapter
+     binding?.btn5?.setOnClickListener {
             Dialog(requireContext()).apply {
                 setContentView(R.layout.custom2)
                 show()}
