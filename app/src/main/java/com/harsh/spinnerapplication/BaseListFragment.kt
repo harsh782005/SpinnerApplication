@@ -1,12 +1,12 @@
+@file:JvmName("BaseList")
+
 package com.harsh.spinnerapplication
 
-import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import com.harsh.spinnerapplication.databinding.FragmentListBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -16,23 +16,24 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [list.newInstance] factory method to
+ * Use the [List.newInstance] factory method to
  * create an instance of this fragment.
  */
-class list : Fragment() {
+class BaseListFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-    var binding: FragmentListBinding? = null
-    lateinit var arrayAdapter: ArrayAdapter<String>
-    var array = arrayListOf("")
-    var mainActivity: MainActivity? = null
+
+    var binding:FragmentListBinding?= null
+    var mainActivity:MainActivity?= null
+var colors = arrayListOf("Red","Green","Blue","Black","Green")
+    private var baseAdapterClass =BaseAdapterClass(colors)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-            mainActivity = activity as MainActivity
+            mainActivity= activity as MainActivity
         }
     }
 
@@ -40,26 +41,16 @@ class list : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(layoutInflater)
+        binding=FragmentListBinding.inflate(layoutInflater)
         return binding?.root
         // Inflate the layout for this fragment
-        //  return inflater.inflate(R.layout.fragment_list, container, false)
+      //  return inflater.inflate(R.layout.fragment_base_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        arrayAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            array
-        )
-        binding?.list?.adapter = arrayAdapter
-        binding?.btn5?.setOnClickListener {
-            Dialog(requireContext()).apply {
-                setContentView(R.layout.custom2)
-                show()
-            }
-        }
+        binding?.list?.adapter = baseAdapterClass
+
     }
 
     companion object {
@@ -69,12 +60,12 @@ class list : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment list.
+         * @return A new instance of fragment fourthFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            list().apply {
+            BaseListFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

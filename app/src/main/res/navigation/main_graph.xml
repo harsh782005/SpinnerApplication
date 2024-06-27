@@ -32,4 +32,9 @@
         android:name="com.harsh.spinnerapplication.list"
         android:label="fragment_list"
         tools:layout="@layout/fragment_list" />
+    <fragment
+        android:id="@+id/baseListFragment"
+        android:name="com.harsh.spinnerapplication.BaseListFragment"
+        android:label="fragment_base_list"
+        tools:layout="@layout/fragment_base_list" />
 </navigation>

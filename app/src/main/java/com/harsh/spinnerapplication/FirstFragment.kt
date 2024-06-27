@@ -49,6 +49,9 @@ class FirstFragment : Fragment() {
         binding?.btn1?.setOnClickListener {
             findNavController().navigate(R.id.action_firstFragment_to_spinnerFragment)
         }
+        binding?.btnBaseList?.setOnClickListener {
+            findNavController().navigate(R.id.baseListFragment)
+        }
 
     }
 

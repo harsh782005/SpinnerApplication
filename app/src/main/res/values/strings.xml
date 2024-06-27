@@ -10,6 +10,9 @@
     <string name="aa">+</string>
     <string name="listveiwadapter">List veiw Adapter</string>
     <string name="congrats">Congratulation\nyou do it</string>
+    <string name="list">List Veiw Array Adapter</string>
+    <string name="name">Name</string>
+    <string name="rollno">Roll no</string>
 
     <string-array name="gender">
         <item name="male">Male</item>
