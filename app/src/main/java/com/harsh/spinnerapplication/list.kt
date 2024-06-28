@@ -7,6 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
+import com.harsh.spinnerapplication.databinding.Custom2Binding
+import com.harsh.spinnerapplication.databinding.CustomBinding
+
 import com.harsh.spinnerapplication.databinding.FragmentListBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -25,14 +29,14 @@ class list : Fragment() {
     private var param2: String? = null
     var binding: FragmentListBinding? = null
     lateinit var arrayAdapter: ArrayAdapter<String>
-    var array = arrayListOf("")
-    var mainActivity: MainActivity? = null
+    var array = arrayListOf("Enter")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-            mainActivity = activity as MainActivity
+
         }
     }
 
@@ -40,7 +44,7 @@ class list : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentListBinding.inflate(layoutInflater)
+        binding = FragmentListBinding.inflate(inflater)
         return binding?.root
         // Inflate the layout for this fragment
         //  return inflater.inflate(R.layout.fragment_list, container, false)
@@ -55,12 +59,27 @@ class list : Fragment() {
         )
         binding?.list?.adapter = arrayAdapter
         binding?.btn5?.setOnClickListener {
-            Dialog(requireContext()).apply {
-                setContentView(R.layout.custom2)
+            val dialogBinding = Custom2Binding.inflate(layoutInflater)
+
+            val dialog = Dialog(requireContext()).apply {
+                setContentView(dialogBinding.root)
                 show()
             }
+
+            dialogBinding.btnAdd.setOnClickListener {
+                if (dialogBinding.tvEnterCity.text?.toString().isNullOrEmpty()) {
+                    dialogBinding.tvEnterCity.error = "enter your city"
+                } else {
+                    array.add(dialogBinding.tvEnterCity.text?.toString() ?: "")
+                    arrayAdapter
+                    dialog.dismiss()
+                }
+            }
+
         }
+
     }
+
 
     companion object {
         /**

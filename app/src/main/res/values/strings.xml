@@ -13,6 +13,11 @@
     <string name="list">List Veiw Array Adapter</string>
     <string name="name">Name</string>
     <string name="rollno">Roll no</string>
+    <string name="enter_city_name">Enter city name</string>
+    <string name="move_to_student_adapter_fragment">Move To Student Adapter</string>
+    <string name="addinfo">Add information</string>
+    <string name="enter">Enter your Details</string>
+    <string name="course">Course</string>
 
     <string-array name="gender">
         <item name="male">Male</item>

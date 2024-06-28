@@ -1,5 +1,3 @@
-@file:JvmName("BaseList")
-
 package com.harsh.spinnerapplication
 
 import android.os.Bundle
@@ -24,16 +22,16 @@ class BaseListFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    var binding:FragmentListBinding?= null
-    var mainActivity:MainActivity?= null
-var colors = arrayListOf("Red","Green","Blue","Black","Green")
-    private var baseAdapterClass =BaseAdapterClass(colors)
+    var binding: FragmentListBinding? = null
+    var mainActivity: MainActivity? = null
+    var colors = arrayListOf("Red", "Green", "Blue", "Black", "Green")
+    private var baseAdapterClass = BaseAdapterClass(colors)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
-            mainActivity= activity as MainActivity
+            mainActivity = activity as MainActivity
         }
     }
 
@@ -41,10 +39,10 @@ var colors = arrayListOf("Red","Green","Blue","Black","Green")
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding=FragmentListBinding.inflate(layoutInflater)
+        binding = FragmentListBinding.inflate(layoutInflater)
         return binding?.root
         // Inflate the layout for this fragment
-      //  return inflater.inflate(R.layout.fragment_base_list, container, false)
+        //  return inflater.inflate(R.layout.fragment_base_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

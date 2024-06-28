@@ -37,4 +37,9 @@
         android:name="com.harsh.spinnerapplication.BaseListFragment"
         android:label="fragment_base_list"
         tools:layout="@layout/fragment_base_list" />
+    <fragment
+        android:id="@+id/studentDataClassFragment"
+        android:name="com.harsh.spinnerapplication.StudentDataClassFragment"
+        android:label="fragment_student_data_class"
+        tools:layout="@layout/fragment_student_data_class" />
 </navigation>
