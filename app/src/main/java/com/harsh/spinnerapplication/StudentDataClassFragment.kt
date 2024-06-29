@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import com.harsh.spinnerapplication.databinding.Custom2Binding
 import com.harsh.spinnerapplication.databinding.Custom3Binding
+import com.harsh.spinnerapplication.databinding.Custom4Binding
 import com.harsh.spinnerapplication.databinding.FragmentStudentDataClassBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -87,6 +89,53 @@ class StudentDataClassFragment : Fragment() {
                     dialog.dismiss()
                 }
             }
+        }
+        binding?.listView?.setOnItemClickListener { adapterView, view, i, l ->
+            val dialogBinding = Custom4Binding.inflate(layoutInflater)
+            val dialog = Dialog(requireContext()).apply {
+                setContentView(dialogBinding.root)
+                getWindow()?.setLayout(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+                )
+                show()
+            }
+            dialogBinding.update.setOnClickListener {
+                if (dialogBinding.name.text.toString().trim().isNullOrEmpty()) {
+                    // dialogBinding.name.error = resources.getString(R.string.name)
+                    dialogBinding.name.error = "enter your name"
+                } else if (dialogBinding.rollno.text.toString().trim().isNullOrEmpty()) {
+                    dialogBinding.rollno.error = "enter your roll no"
+                } else if (dialogBinding.course.text.toString().trim().isNullOrEmpty()) {
+                    dialogBinding.course.error = "enter your course"
+                } else {
+                    studentarray.set(
+                        i, StudentDataClass(
+                            dialogBinding.name.text.toString().toInt(),
+                            dialogBinding.rollno.text.toString(),
+                            dialogBinding.course.text.toString()
+                                    
+                        )
+                    )
+                    dialog.dismiss()
+                }
+
+            }
+        }
+        binding?.listView?.setOnItemLongClickListener { adapterView, view, i, l ->
+            var alertDialog = AlertDialog.Builder(requireContext())
+            alertDialog.setTitle("do you want to delete")
+            alertDialog.setPositiveButton("yes") { _, _ ->
+                studentarray.removeAt(i)
+                adapter.notifyDataSetChanged()
+
+            }
+            alertDialog.setNegativeButton("No") { _, _ ->
+            }
+            alertDialog.show()
+            return@setOnItemLongClickListener true
+
+
         }
     }
 
