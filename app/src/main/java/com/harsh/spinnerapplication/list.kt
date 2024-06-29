@@ -71,7 +71,7 @@ class list : Fragment() {
                     dialogBinding.tvEnterCity.error = "enter your city"
                 } else {
                     array.add(dialogBinding.tvEnterCity.text?.toString() ?: "")
-                    arrayAdapter
+                    arrayAdapter.notifyDataSetChanged()
                     dialog.dismiss()
                 }
             }

@@ -1,10 +1,15 @@
 package com.harsh.spinnerapplication
 
+import android.R
+import android.app.Dialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import com.harsh.spinnerapplication.databinding.Custom2Binding
+import com.harsh.spinnerapplication.databinding.Custom3Binding
 import com.harsh.spinnerapplication.databinding.FragmentStudentDataClassBinding
 
 // TODO: Rename parameter arguments, choose names that match
@@ -51,7 +56,38 @@ class StudentDataClassFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.listView?.adapter = adapter
+        binding?.btnfab?.setOnClickListener {
 
+            val dialogBinding = Custom3Binding.inflate(layoutInflater)
+
+            val dialog = Dialog(requireContext()).apply {
+                setContentView(dialogBinding.root)
+                show()
+            }
+            dialogBinding.btnUpdate.setOnClickListener {
+                if (dialogBinding.Name.text.toString().isNullOrEmpty()) {
+                    dialogBinding.Name.error = " enter your name"
+                }
+
+                if (dialogBinding.Course.text.toString().isNullOrEmpty()) {
+                    dialogBinding.Course.error = " enter your course"
+                }
+                if (dialogBinding.RollNo.text.toString().isNullOrEmpty()) {
+                    dialogBinding.RollNo.error = " enter your roll no"
+                } else {
+
+                    studentarray.add(
+                        StudentDataClass(
+                            dialogBinding.Name.text.toString().toInt(),
+                            dialogBinding.RollNo.text?.toString(),
+                            dialogBinding.Course.text?.toString()
+                        )
+                    )
+
+                    dialog.dismiss()
+                }
+            }
+        }
     }
 
     companion object {
